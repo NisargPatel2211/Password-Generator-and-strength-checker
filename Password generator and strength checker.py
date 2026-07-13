@@ -1,57 +1,131 @@
 #Password Generator and strength checker
 
 import random
+import re
 
-uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+#Menu
 
-lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+def menu():
 
-digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+    print("Welcome to password generator\n\n")
+    print('1.User input password')
+    print('2.System created password\n')
 
-symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', '\'' , '|', ';', ':', "'", '"', ',', '<', '.', '>', '/', '?', '`', '~' ]
+    ch=int(input('Enter you choice:'))
 
-password_list=[]
+    while True:
+        if ch==1:
 
-print("Welcome to password generator")
+            user_input_password()
 
-n_uppercase=int(input('Enter how much Uppercase letters you want for your password:'))
+        elif ch==2:
+            
+            password_generator_system()
 
-n_lowercase=int(input('Enter how much lowercase letters you want for your password:'))
+        else:
 
-n_digit=int(input('Enter how much digit you want for your password:'))
+            print('Invalid choice')
+            break
+            
+#Password Generator by system
 
-n_symbols=int(input('Enter how much symbols you want for your password:'))
+def password_generator_system():
+    
+    uppercase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-for i in range(1,n_uppercase+1):
+    lowercase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
-    char = random.choice(uppercase)
-           
-    password_list += char
+    digit = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-for i in range(1,n_lowercase+1):
+    symbols = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', '[', ']', '{', '}', '\'' , '|', ';', ':', '"', ',', '<', '.', '>', '/', '?', '`', '~' ]
 
-    char = random.choice(lowercase)
-           
-    password_list += char
+    password_list=[]
 
-for i in range(1,n_digit+1):
+    n_uppercase=int(input('Enter how much Uppercase letters you want for your password:'))
 
-    char = random.choice(digit)
-           
-    password_list += char
+    n_lowercase=int(input('Enter how much lowercase letters you want for your password:'))
 
-for i in range(1,n_symbols+1):
+    n_digit=int(input('Enter how much digit you want for your password:'))
 
-    char = random.choice(symbols)
-           
-    password_list += char
+    n_symbols=int(input('Enter how much symbols you want for your password:'))
 
-random.shuffle(password_list)
+    for i in range(1,n_uppercase+1):
 
-password = ''
+        char = random.choice(uppercase)
+               
+        password_list += char
 
-for char in password_list:
+    for i in range(1,n_lowercase+1):
 
-    password += char
+        char = random.choice(lowercase)
+               
+        password_list += char
 
-print(password)
+    for i in range(1,n_digit+1):
+
+        char = random.choice(digit)
+               
+        password_list += char
+
+    for i in range(1,n_symbols+1):
+
+        char = random.choice(symbols)
+               
+        password_list += char
+
+    random.shuffle(password_list)
+
+    password = ''
+
+    for char in password_list:
+
+        password += char
+
+    result = check_password(password)
+    
+    print(result)
+
+
+#User input password
+
+def user_input_password():
+
+    while True:
+
+        password = input('Enter password (or write [exit] to end ):')
+
+        if password.lower() == 'exit':
+
+            print('Thank you for using this tool')
+            break
+            
+
+        result = check_password(password)
+        print(result)
+
+#Password Srength Checker
+
+def check_password(password):
+
+    if len(password) <8:
+        return '\nPassword length should be minimum of 8 characters'
+
+    if not any(char.isupper() for char in password):
+        return '\nPassword should contain minimum of 1 Uppercase'
+
+    if not any(char.islower() for char in password):
+        return '\nPassword should contain minimum of 1 Lowercase'
+
+    if not any(char.isdigit() for char in password):
+        return '\nPassword should contain minimum of 1 Digit'
+
+    if not re.search(r'[!@#$%^&*()\-_=+\[\]\{\}|;:",<.>/?`~]', password):
+        return '\nPassword should contain minimum of 1 special symbol'
+
+    return f"{password} is strong password"
+    
+
+#Run program from here
+
+if __name__ == "__main__":
+    menu()
