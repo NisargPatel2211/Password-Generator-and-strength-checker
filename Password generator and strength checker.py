@@ -7,13 +7,17 @@ import re
 
 def menu():
 
-    print("Welcome to password generator\n\n")
-    print('1.User input password')
-    print('2.System created password\n')
-
-    ch=int(input('Enter you choice:'))
-
     while True:
+
+        print('---------------MENU--------------')
+        print("Welcome to password generator\n\n")
+        print('1.User input password')
+        print('2.System created password')
+        print('3.Exit\n')
+
+
+        ch=int(input('Enter you choice:'))
+
         if ch==1:
 
             user_input_password()
@@ -22,10 +26,14 @@ def menu():
             
             password_generator_system()
 
+        elif ch==3:
+
+            print('\nThank you for using this tool!')
+            break
+
         else:
 
             print('Invalid choice')
-            break
             
 #Password Generator by system
 
@@ -99,7 +107,6 @@ def user_input_password():
             print('Thank you for using this tool')
             break
             
-
         result = check_password(password)
         print(result)
 
@@ -119,7 +126,7 @@ def check_password(password):
     if not any(char.isdigit() for char in password):
         return '\nPassword should contain minimum of 1 Digit'
 
-    if not re.search(r'[!@#$%^&*()\-_=+\[\]\{\}|;:",<.>/?`~]', password):
+    if not re.search(r'[!@#$%^&*()\-_=+\[\]{}|;:",<.>/?`~]', password):
         return '\nPassword should contain minimum of 1 special symbol'
 
     return f"{password} is strong password"
