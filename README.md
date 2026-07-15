@@ -67,3 +67,14 @@ Enter how much symbols you want for your password:2
 
 aB3!k9pQ@r is strong password
 ```
+
+## Possible Improvements
+
+- Use Python's `secrets` module instead of `random` for cryptographically secure password generation.
+- Add password length as a direct input option.
+- Provide a strength score (weak/medium/strong) instead of pass/fail messages.
+- Add a GUI or web interface.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
