@@ -26,8 +26,8 @@ A Python command-line tool that generates strong, customizable passwords and che
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/password-generator-and-strength-checker.git
-cd password-generator-and-strength-checker
+git clone https://github.com/NisargPatel2211/Password-Generator-and-strength-checker.git
+cd Password-Generator-and-strength-checker
 ```
 
 ## Usage
@@ -35,7 +35,7 @@ cd password-generator-and-strength-checker
 Run the script:
 
 ```bash
-python "Password_generator_and_strength_checker.py"
+python "Password generator and strength checker.py"
 ```
 
 You'll see a menu with three options:
@@ -89,3 +89,8 @@ Password needs: minimum 8 characters, at least 1 uppercase letter, at least 1 di
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
+
+## Author
+
+**Nisarg Patel**
+GitHub: [@NisargPatel2211](https://github.com/NisargPatel2211)
