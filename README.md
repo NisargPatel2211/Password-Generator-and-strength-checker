@@ -1,11 +1,13 @@
 # Password Generator & Strength Checker
 
-A simple Python command-line tool that generates strong, customizable passwords and checks the strength of any password you provide.
+A Python command-line tool that generates strong, customizable passwords and checks the strength of any password you provide. Built with security best practices in mind, using Python's `secrets` module for cryptographically secure randomness.
 
 ## Features
 
-- **System-generated passwords** — choose exactly how many uppercase letters, lowercase letters, digits, and symbols you want, and the tool builds a randomly shuffled password to match.
-- **User password checker** — enter your own password and get instant feedback on whether it meets strength requirements.
+- **System-generated passwords** — choose exactly how many uppercase letters, lowercase letters, digits, and symbols you want, and the tool builds a securely randomized, shuffled password to match.
+- **User password checker** — enter your own password and get instant feedback on every requirement it's missing (not just the first one it finds).
+- **Cryptographically secure** — uses the `secrets` module instead of `random`, making generated passwords suitable for real-world use.
+- **Robust input handling** — invalid input (non-numbers, negative numbers) is caught and re-prompted instead of crashing the program.
 - **Strength validation** based on:
   - Minimum length of 8 characters
   - At least 1 uppercase letter
@@ -17,7 +19,7 @@ A simple Python command-line tool that generates strong, customizable passwords 
 ## Requirements
 
 - Python 3.x
-- No external dependencies (uses only the built-in `random` and `re` modules)
+- No external dependencies (uses only the built-in `secrets`, `string`, and `re` modules)
 
 ## Installation
 
@@ -48,10 +50,10 @@ Welcome to password generator
 ```
 
 ### Option 1: Check your own password
-Enter any password you'd like, and the tool will tell you whether it's strong or which requirement it's missing. Type `exit` to return to the menu.
+Enter any password you'd like, and the tool will list every strength requirement it fails to meet. Type `exit` to return to the menu.
 
 ### Option 2: Generate a password
-Specify how many uppercase letters, lowercase letters, digits, and symbols you want included. The tool randomly generates and shuffles a password matching your criteria, then runs it through the strength checker.
+Specify how many uppercase letters, lowercase letters, digits, and symbols you want included. The tool securely generates and shuffles a password matching your criteria, then runs it through the strength checker. You must request at least one character total.
 
 ### Option 3: Exit
 Closes the program.
@@ -65,14 +67,23 @@ Enter how much lowercase letters you want for your password:4
 Enter how much digit you want for your password:2
 Enter how much symbols you want for your password:2
 
-aB3!k9pQ@r is strong password
+aB3!k9pQ@r is a strong password
+```
+
+```
+Enter you choice:1
+Enter password (or write [exit] to end ):abc
+
+Password needs: minimum 8 characters, at least 1 uppercase letter, at least 1 digit, at least 1 special symbol
 ```
 
 ## Possible Improvements
 
-- Use Python's `secrets` module instead of `random` for cryptographically secure password generation.
-- Add password length as a direct input option.
-- Provide a strength score (weak/medium/strong) instead of pass/fail messages.
+- Add a weighted strength *score* (weak/medium/strong/very strong) instead of pass/fail messages.
+- Check generated/entered passwords against a common or breached password list.
+- Add a maximum length limit and reject whitespace-only passwords.
+- Add docstrings to functions for better maintainability.
+- Add unit tests (`pytest`) for `check_password`.
 - Add a GUI or web interface.
 
 ## License
